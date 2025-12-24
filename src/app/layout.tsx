@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Outfit, Great_Vibes } from 'next/font/google';
+import { Outfit, Great_Vibes, Indie_Flower } from 'next/font/google';
 import './globals.css';
 
 const outfit = Outfit({
@@ -15,9 +15,16 @@ const greatVibes = Great_Vibes({
   display: 'swap',
 });
 
+const indieFlower = Indie_Flower({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-indie-flower',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Parabéns!',
-  description: 'Um site especial para um dia especial.',
+  title: 'Para Joyce 🍓',
+  description: 'Um cantinho especial para você.',
 };
 
 export default function RootLayout({
@@ -26,8 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body className={`${outfit.variable} ${greatVibes.variable}`}>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={`${outfit.variable} ${greatVibes.variable} ${indieFlower.variable} antialiased text-[#5D4037]`}>
         {children}
       </body>
     </html>
