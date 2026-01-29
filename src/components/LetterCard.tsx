@@ -7,12 +7,17 @@ import Image from 'next/image';
 export default function LetterCard() {
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
+    const audioRef = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
+                    if (audioRef.current) {
+                        audioRef.current.volume = 0.5; // Set volume to 50%
+                        audioRef.current.play().catch((e: any) => console.log('Audio playback failed:', e));
+                    }
                 }
             },
             { threshold: 0.2 }
@@ -30,6 +35,7 @@ export default function LetterCard() {
             id="letter-section"
             className="min-h-screen flex items-center justify-center p-6 md:p-12 relative"
         >
+            <audio ref={audioRef} src="/Trovoa.mp4" loop />
             <div
                 ref={ref}
                 className={`max-w-3xl w-full bg-cream p-8 md:p-16 rounded-2xl shadow-lg border border-red-soft/10 relative transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
